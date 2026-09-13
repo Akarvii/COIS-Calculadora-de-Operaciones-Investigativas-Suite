@@ -2,14 +2,14 @@
   <header class="navbar">
     <div class="nav-brand">
       <div class="logo-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 3v18h18" />
-          <path d="m19 9-5 5-4-4-3 3" />
-        </svg>
+        <img src="/mathapp.ico" alt="CIMS Logo" class="brand-logo-img" />
       </div>
-      <div>
-        <h1 class="nav-title">OptiMatrix</h1>
-        <span class="nav-subtitle">Calculadora Simplex & Simplex Revisado</span>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <h1 class="nav-title">CIMS</h1>
+          <span class="brand-tag">v1.0</span>
+        </div>
+        <span class="nav-subtitle">Calculadora Investigativa del Método Simplex</span>
       </div>
     </div>
 
@@ -285,31 +285,79 @@ defineExpose({
   display: flex;
   align-items: center;
   gap: 12px;
+  user-select: none;
 }
 
 .logo-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background: rgba(56, 189, 248, 0.12);
-  color: var(--accent-blue);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.logo-icon:hover {
+  transform: scale(1.04);
+  border-color: rgba(56, 189, 248, 0.45);
+}
+
+.brand-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
+  gap: 3px;
+}
+
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-title {
-  font-size: 1.05rem;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.brand-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
   font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--text-main);
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 1px 6px;
+  border-radius: 4px;
   line-height: 1.2;
 }
 
 .nav-subtitle {
-  font-size: 0.72rem;
+  font-size: 0.73rem;
+  font-weight: 400;
   color: var(--text-muted);
+  letter-spacing: 0.1px;
 }
 
 .nav-controls {

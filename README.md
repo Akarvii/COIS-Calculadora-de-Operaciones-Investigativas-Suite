@@ -295,8 +295,9 @@ CIMS-Calculadora-Investigativa-Metodo-Simplex-/
 
 4. Inicie el servidor de desarrollo:
    ```bash
-   uvicorn backend.main:app --reload --port 8000
+   uvicorn main:app --reload --port 8000
    ```
+   *(o si ejecuta desde la raíz del proyecto: `uvicorn backend.main:app --reload --port 8000`)*
    - **API Backend disponible en:** `http://127.0.0.1:8000`  
    - **Documentación interactiva Swagger UI:** `http://127.0.0.1:8000/docs`
 

@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Asegurar que la raíz del proyecto esté en sys.path para importaciones de 'backend.*'
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import time
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -13,7 +19,7 @@ from backend.core.revised_simplex import RevisedSimplexSolver
 
 
 app = FastAPI(
-    title="Simplex & Revised Simplex Optimization API",
+    title="CIMS - Calculadora Investigativa del Método Simplex API",
     description="API para resolución exacta y paso a paso de Programación Lineal con Método Simplex y Simplex Revisado.",
     version="1.0.0"
 )
