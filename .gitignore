@@ -80,12 +80,10 @@ lerna-debug.log*
 !.env.example
 
 # IDEs & Text Editors
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
+**/.vscode/
 .idea/
+**/.idea/
 *.sublime-project
 *.sublime-workspace
 *.swp
