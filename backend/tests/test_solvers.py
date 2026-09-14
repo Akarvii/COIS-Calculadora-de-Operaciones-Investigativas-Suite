@@ -246,3 +246,123 @@ class TestEdgeCasesAndStability:
         assert len(std_res.sensitivity_report.constraints) == 3
         shadow_prices = [c.shadow_price.fraction for c in std_res.sensitivity_report.constraints]
         assert any(sp != "0" for sp in shadow_prices)
+
+
+class TestWordDocumentExercises:
+    """Tests corresponding to the exact exercises in 'Metodo_Simplex_Revisado_COMPLETO_Listo_Entrega.docx'."""
+
+    def test_introductory_example(self):
+        """
+        Ejemplo Introductorio:
+        Max Z = 3x1 + 2x2
+        s.t.
+          x1 + x2 <= 4
+          2x1 + x2 <= 5
+          x1, x2 >= 0
+        Expected: x1 = 1, x2 = 3, Z = 9
+        """
+        req = LinearProgramRequest(
+            objective_type="MAXIMIZE",
+            c=[3, 2],
+            A=[[1, 1], [2, 1]],
+            constraint_types=["<=", "<="],
+            b=[4, 5],
+            variable_names=["x1", "x2"]
+        )
+        rev_res = RevisedSimplexSolver(req).solve()
+        std_res = StandardSimplexSolver(req).solve()
+
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.optimal_value.fraction == "9"
+        assert std_res.optimal_value.fraction == "9"
+        assert rev_res.solution["x1"].fraction == "1"
+        assert rev_res.solution["x2"].fraction == "3"
+
+    def test_fishback_ejercicio_1(self):
+        """
+        Ejercicio 1 (Fishback 2010, p. 70, Ex. 1):
+        Max Z = 3x1 + 2x2
+        s.t.
+          x1 <= 4
+          x1 + 3x2 <= 15
+          2x1 + x2 <= 10
+          x1, x2 >= 0
+        Expected: x1 = 3, x2 = 4, Z = 17, s1 = 1
+        """
+        req = LinearProgramRequest(
+            objective_type="MAXIMIZE",
+            c=[3, 2],
+            A=[[1, 0], [1, 3], [2, 1]],
+            constraint_types=["<=", "<=", "<="],
+            b=[4, 15, 10],
+            variable_names=["x1", "x2"]
+        )
+        rev_res = RevisedSimplexSolver(req).solve()
+        std_res = StandardSimplexSolver(req).solve()
+
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.optimal_value.fraction == "17"
+        assert std_res.optimal_value.fraction == "17"
+        assert rev_res.solution["x1"].fraction == "3"
+        assert rev_res.solution["x2"].fraction == "4"
+
+    def test_fishback_ejercicio_2(self):
+        """
+        Ejercicio 2 (Fishback 2010, p. 70, Ex. 2):
+        Max Z = 4x1 + x2 + 5x3
+        s.t.
+          2x1 + x2 + 3x3 <= 14
+          6x1 + 3x2 + 3x3 <= 22
+          2x1 + 3x2 <= 14
+          x1, x2, x3 >= 0
+        Expected: x1 = 2, x2 = 0, x3 = 10/3, Z = 74/3, s3 = 10
+        """
+        req = LinearProgramRequest(
+            objective_type="MAXIMIZE",
+            c=[4, 1, 5],
+            A=[[2, 1, 3], [6, 3, 3], [2, 3, 0]],
+            constraint_types=["<=", "<=", "<="],
+            b=[14, 22, 14],
+            variable_names=["x1", "x2", "x3"]
+        )
+        rev_res = RevisedSimplexSolver(req).solve()
+        std_res = StandardSimplexSolver(req).solve()
+
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.optimal_value.fraction == "74/3"
+        assert std_res.optimal_value.fraction == "74/3"
+        assert rev_res.solution["x1"].fraction == "2"
+        assert rev_res.solution["x2"].fraction == "0"
+        assert rev_res.solution["x3"].fraction == "10/3"
+
+    def test_fishback_ejercicio_3(self):
+        """
+        Ejercicio 3 (Fishback 2010, p. 70, Ex. 3):
+        Min Z = 3x1 - 2x2
+        s.t.
+          x1 - 2x2 <= 2
+          x1 + x2 <= 4
+          x1, x2 >= 0
+        Expected: x1 = 0, x2 = 4, Z = -8, s1 = 10
+        """
+        req = LinearProgramRequest(
+            objective_type="MINIMIZE",
+            c=[3, -2],
+            A=[[1, -2], [1, 1]],
+            constraint_types=["<=", "<="],
+            b=[2, 4],
+            variable_names=["x1", "x2"]
+        )
+        rev_res = RevisedSimplexSolver(req).solve()
+        std_res = StandardSimplexSolver(req).solve()
+
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.optimal_value.fraction == "-8"
+        assert std_res.optimal_value.fraction == "-8"
+        assert rev_res.solution["x1"].fraction == "0"
+        assert rev_res.solution["x2"].fraction == "4"
+
