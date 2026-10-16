@@ -1,0 +1,73 @@
+.plot-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.plot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.plot-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.plot-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.plot-legend {
+  display: flex;
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-feasible {
+  background: rgba(56, 189, 248, 0.7);
+}
+
+.dot-path {
+  background: #F59E0B;
+}
+
+.dot-optimal {
+  background: #10B981;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  height: 360px;
+  background: #090D15;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plot-canvas {
+  width: 100%;
+  height: 100%;
+}
