@@ -1,0 +1,97 @@
+.networks-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary, #0A0E17);
+  color: var(--text-main, #F1F5F9);
+  overflow: hidden;
+}
+
+.networks-body {
+  flex: 1;
+  padding: 28px 32px;
+  overflow-y: auto;
+}
+
+.tab-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid rgba(34, 48, 73, 0.6);
+  padding-bottom: 18px;
+}
+
+.section-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #F8FAFC;
+  margin-bottom: 4px;
+}
+
+.section-subtitle {
+  font-size: 0.88rem;
+  color: #94A3B8;
+  max-width: 780px;
+}
+
+.quick-stats {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pill-tech {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.placeholder-card {
+  background: var(--bg-card, #151E2E);
+  border: 1px solid var(--border-color, #223049);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+}
+
+.banner-icon {
+  font-size: 1.25rem;
+}
+
+.empty-state {
+  border: 2px dashed rgba(71, 85, 105, 0.35);
+  border-radius: 10px;
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748B;
+  font-size: 0.92rem;
+}
