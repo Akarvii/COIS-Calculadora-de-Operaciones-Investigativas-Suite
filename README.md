@@ -148,19 +148,33 @@ Especializado en la formulación, exploración y resolución analítica de probl
 
 ### Módulo II: COIS-Networks (Optimización en Redes & Algoritmos de Grafos)
 
-Dedicado a los modelos clásicos y avanzados de optimización combinatoria sobre grafos y redes:
+Dedicado a los modelos clásicos y avanzados de optimización combinatoria sobre grafos y redes, equipado con calculadoras interactivas y motores de resolución exacta:
 
 1. **Problema de Asignación (Algoritmo de Kuhn-Munkres / Húngaro):**
    - Resolución en tiempo polinomial $O(n^3)$ sobre grafos bipartitos ponderados.
-   - Soporte para minimización de costes y maximización de utilidades.
-   - Manejo automático de matrices desbalanceadas (filas/columnas ficticias).
-   - Asignaciones prohibidas con penalización de costo grande ($M$).
-2. **Problema de Flujo Máximo:**
-   - Implementación de los algoritmos de **Edmonds-Karp** ($O(V \cdot E^2)$) y **Ford-Fulkerson** mediante búsqueda en anchura (BFS) en la red residual.
-   - Identificación y demostración interactiva del **Teorema de Corte Mínimo** (*Max-Flow Min-Cut*).
-3. **Problema de Flujo a Costo Mínimo (*Min-Cost Flow*):**
-   - Generalización integral de redes con nodos de oferta, demanda y transbordo.
-   - Optimización simultánea de capacidad y costo unitario mediante caminos mínimos sucesivos (*Successive Shortest Path*) y actualización de potenciales duales.
+   - Selector reactivo de objetivo: **Minimizar (Costo)** o **Maximizar (Ganancia)** mediante transformación $c'_{ij} = \max(p) - p_{ij}$.
+   - Controles de ajuste dimensional en tiempo real ($2 \times 2$ hasta $6 \times 6$) con edición directa de celdas y etiquetas personalizadas de recursos y tareas.
+   - Manejo automático de problemas rectangulares desbalanceados ($m \neq n$) incorporando filas o columnas ficticias con costo 0.
+   - Procedimiento didáctico paso a paso: Paso 0 (Balanceo ficticio), Paso 1 (Reducción por filas $u_i$), Paso 2 (Reducción por columnas $v_j$), Paso 3 (Cobertura de ceros con líneas mínimas de König $L = n$ y ajuste iterativo con $\theta$).
+2. **Problema de Flujo Máximo (Edmonds-Karp / BFS):**
+   - Calculadora interactiva con tabla de arcos dirigida y capacitada, permitiendo agregar y eliminar arcos dinámicamente en caliente.
+   - Configuración flexible de nodo Fuente ($s$) y nodo Sumidero ($t$).
+   - Algoritmo de **Edmonds-Karp** ($O(V \cdot E^2)$) implementado mediante búsqueda en amplitud (BFS) en la red residual para garantizar el camino aumentante más corto en número de arcos.
+   - Reporte iteración a iteración con identificación del cuello de botella ($\delta$) y flujo acumulado.
+   - Demostración explícita del **Teorema de Flujo Máximo y Corte Mínimo** (*Max-Flow Min-Cut*): partición de corte $(S, T)$, arcos que saturan el canal y verificación de igualdad estricta $\text{Flujo}^* = \text{Capacidad}(S, T)$.
+3. **Problema de Flujo a Costo Mínimo (*Min-Cost Flow* - MCFP):**
+   - Generalización integral de redes con balances netos en nodos $b_i$ (orígenes $b_i > 0$, destinos $b_i < 0$, transbordo $b_i = 0$).
+   - Verificación estricta de la condición de factibilidad: $\sum b_i = 0$.
+   - Soporte para capacidades finitas o ilimitadas ($\infty$) y costos unitarios arbitrarios.
+   - Resolución exacta mediante el algoritmo de **Caminos Mínimos Sucesivos** (*Successive Shortest Path*) con SPFA/Bellman-Ford sobre la red residual.
+   - Detalle de iteraciones, caminos mínimos utilizados, potenciales duales y cálculo del costo global $Z^*$.
+4. **Flujo de Trabajo y Paradigma CIMS en Redes:**
+   - **Carga de Plantillas sin Auto-Cálculo Prematuro:** Al seleccionar cualquier ejercicio preconfigurado del menú superior, los datos se despliegan en la tabla para revisión y modificación libre; el cálculo se ejecuta únicamente cuando el usuario presiona "Calcular".
+   - **Bloqueo Reactivo de Pestañas:** Para garantizar coherencia metodológica y evitar cruces de datos accidentales, al trabajar en una pestaña activa o con un ejercicio precargado, las otras dos pestañas quedan protegidas hasta presionar "Limpiar" o cambiar de preconfiguración.
+   - **Catálogo de 10 Ejercicios Preconfigurados:**
+     - **Asignación:** Centrales Térmicas ($3\times 3$ Min, $Z^*=17$), Vendedores a Zonas ($3\times 3$ Max, $Z^*=200$), Caso Desbalanceado ($3\times 4$ Min, $Z^*=500$), Técnicos a Máquinas ($4\times 4$ Min, $Z^*=22$), Vendedores a Zonas ($4\times 4$ Max, $Z_{max}=89$) y Operarios a Tareas ($3\times 4$ Desbalanceado, $Z^*=21$).
+     - **Flujo Máximo:** Red de Distribución (6 nodos, 8 arcos capacitados, Flujo óptimo = 14, Corte $S/T = 14$).
+     - **Flujo a Costo Mínimo:** Red 4 Nodos Capacitada ($Z^*=26$), Modelo de Transporte ($2\times 3$, $Z^*=350$) y Transbordo Multidestino (5 nodos, $Z^*=24$).
 
 ---
 
@@ -397,6 +411,10 @@ COIS-Calculadora-de-Operaciones-Investigativas-Suite/
     │   │   └── NetworksApp/           # Módulo de Redes (Asignación, Flujo Máx, Costo Mín)
     │   │       ├── NetworksApp.vue
     │   │       └── NetworksApp.css
+    │   ├── utils/                     # Motores matemáticos cliente de optimización en redes
+    │   │   ├── hungarianSolver.js     # Algoritmo de Kuhn-Munkres (Húngaro) con balanceo y König
+    │   │   ├── maxFlowSolver.js       # Algoritmo de Edmonds-Karp (BFS) y Teorema de Corte Mínimo
+    │   │   └── minCostFlowSolver.js   # Algoritmo de Caminos Mínimos Sucesivos (MCFP) y potenciales
     │   ├── App.vue                    # Componente raíz con control reactivo de vistas
     │   ├── main.js                    # Inicializador de la aplicación Vue
     │   └── style.css                  # Tokens globales, variables de color y tipografía
