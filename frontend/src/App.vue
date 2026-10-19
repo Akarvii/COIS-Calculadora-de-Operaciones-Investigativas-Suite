@@ -53,10 +53,16 @@
           active-module="networks"
           :api-status="apiStatus"
           v-model:networksTab="networksTab"
+          :selected-network-exercise-id="selectedNetworkExerciseId"
+          @select-network-exercise="handleSelectNetworkExercise"
           @back-to-selector="activeModule = null"
         />
         <div class="scene-body">
-          <NetworksApp :active-tab="networksTab" />
+          <NetworksApp 
+            :active-tab="networksTab" 
+            :selected-exercise-id="selectedNetworkExerciseId"
+            @clear-exercise="handleClearNetworkExercise"
+          />
         </div>
       </div>
     </Transition>
@@ -77,6 +83,7 @@ const API_BASE_URL = 'http://localhost:8000'
 // Estado del módulo activo: null = selector COIS, 'cims' = COIS-IMS, 'networks' = COIS-Networks
 const activeModule = ref(null)
 const networksTab = ref('assignment')
+const selectedNetworkExerciseId = ref('blank_networks')
 
 // Estado reactivo de la API: 'connected' | 'disconnected' | 'error'
 const apiStatus = ref('connected')
@@ -91,6 +98,21 @@ const solverResponse = ref(null)
 
 function handleSelectModule(moduleKey) {
   activeModule.value = moduleKey
+}
+
+function handleSelectNetworkExercise(exerciseId) {
+  selectedNetworkExerciseId.value = exerciseId
+  if (['asig_1', 'asig_2', 'asig_3'].includes(exerciseId)) {
+    networksTab.value = 'assignment'
+  } else if (exerciseId === 'max_1') {
+    networksTab.value = 'max_flow'
+  } else if (['mcfp_1', 'mcfp_2', 'mcfp_3'].includes(exerciseId)) {
+    networksTab.value = 'min_cost_flow'
+  }
+}
+
+function handleClearNetworkExercise() {
+  selectedNetworkExerciseId.value = 'blank_networks'
 }
 
 // Preset problems catalogue
