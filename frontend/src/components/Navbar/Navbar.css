@@ -255,6 +255,20 @@
   margin-bottom: 4px;
 }
 
+.dropdown-category-divider {
+  padding: 8px 10px 4px 10px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #38BDF8;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(34, 48, 73, 0.6);
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
 .dropdown-item {
   width: 100%;
   display: flex;
@@ -381,6 +395,23 @@
   background: #10b981;
   color: #ffffff;
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.net-tab-btn.is-locked {
+  opacity: 0.35;
+  cursor: not-allowed !important;
+  color: #64748B !important;
+}
+
+.net-tab-btn.is-locked:hover {
+  background: transparent !important;
+  color: #64748B !important;
+}
+
+.tab-lock-icon {
+  font-size: 0.7rem;
+  margin-left: 2px;
+  opacity: 0.8;
 }
 
 .net-tab-dot {
