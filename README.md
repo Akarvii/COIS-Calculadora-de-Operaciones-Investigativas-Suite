@@ -10,7 +10,7 @@
   [![Vue 3](https://img.shields.io/badge/Vue.js-3.5%2B-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
   [![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
   [![Version](https://img.shields.io/badge/Release-v2.0%20(Suite%20Generation)-0284C7?style=for-the-badge)](#-visión-general)
-  [![Pytest](https://img.shields.io/badge/Pytest-23%2F23%20Passed%20(100%25)-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
+  [![Pytest](https://img.shields.io/badge/Pytest-27%2F27%20Passed%20(100%25)-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://docs.pytest.org/)
   [![Copyright](https://img.shields.io/badge/Copyright-All%20Rights%20Reserved-red.svg?style=for-the-badge)](#-aviso-académico-propiedad-intelectual-y-derechos-de-autor)
   [![Uso](https://img.shields.io/badge/Uso-Acad%C3%A9mico%20Personal-blueviolet.svg?style=for-the-badge)](#-aviso-académico-propiedad-intelectual-y-derechos-de-autor)
 </div>
@@ -477,7 +477,7 @@ COIS-Calculadora-de-Operaciones-Investigativas-Suite/
 
 ### 3. Ejecución de Pruebas Automatizadas (Pytest)
 
-El repositorio incluye una batería exhaustiva de **23 pruebas automatizadas** que validan la aritmética exacta, casos especiales y consistencia entre métodos.
+El repositorio incluye una batería exhaustiva de pruebas automatizadas que validan la aritmética exacta, casos especiales y consistencia entre métodos.
 
 Para ejecutar la suite mediante el script unificado de diagnóstico:
 ```bash
