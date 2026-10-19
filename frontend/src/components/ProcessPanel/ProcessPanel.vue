@@ -390,7 +390,7 @@
           <!-- Dual Multipliers Vector pi -->
           <div class="card">
             <div class="card-header">
-              <span class="card-title">Multiplicadores Duales (πᵀ = c_Bᵀ · B⁻¹)</span>
+              <span class="card-title">Multiplicadores Duales (πᵀ = cᵦᵀ · B⁻¹)</span>
             </div>
             <div class="vector-display">
               <div v-for="(piVal, i) in currentRevisedStep.pi_multipliers" :key="'pi_' + i" class="vector-item">
