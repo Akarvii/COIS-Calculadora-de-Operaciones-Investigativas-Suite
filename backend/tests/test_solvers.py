@@ -366,3 +366,133 @@ class TestWordDocumentExercises:
         assert rev_res.solution["x1"].fraction == "0"
         assert rev_res.solution["x2"].fraction == "4"
 
+
+class TestNetworkExercises:
+    """Pruebas unitarias para los ejercicios de optimización en redes y asignación."""
+
+    def test_asignacion_centrales_termicas_3x3(self):
+        """
+        Ejercicio de asignación:
+        Empresas auxiliares A, B, C a Centrales térmicas 1, 2, 3.
+        Esperado: Z* = 17, x1=1, x6=1, x8=1
+        """
+        req = LinearProgramRequest(
+            objective_type="MINIMIZE",
+            c=[10, 9, 5, 9, 8, 3, 6, 4, 7],
+            A=[
+                [1, 1, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 1, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                [1, 0, 0, 1, 0, 0, 1, 0, 0],
+                [0, 1, 0, 0, 1, 0, 0, 1, 0],
+                [0, 0, 1, 0, 0, 1, 0, 0, 1]
+            ],
+            constraint_types=["=", "=", "=", "=", "=", "="],
+            b=[1, 1, 1, 1, 1, 1],
+            variable_names=["x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9"]
+        )
+        std_res = StandardSimplexSolver(req).solve()
+        rev_res = RevisedSimplexSolver(req).solve()
+
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.optimal_value.fraction == "17"
+        assert rev_res.optimal_value.fraction == "17"
+        assert std_res.solution["x1"].fraction == "1"
+        assert std_res.solution["x6"].fraction == "1"
+        assert std_res.solution["x8"].fraction == "1"
+
+    def test_asignacion_vendedores_zonas_max(self):
+        """
+        Ejercicio de asignación con maximización:
+        Maximización de ganancias para 3 vendedores en 3 zonas.
+        Esperado: Z* = 200
+        """
+        req = LinearProgramRequest(
+            objective_type="MAXIMIZE",
+            c=[40, 60, 50, 70, 30, 60, 50, 80, 40],
+            A=[
+                [1, 1, 1, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 1, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 1, 1, 1],
+                [1, 0, 0, 1, 0, 0, 1, 0, 0],
+                [0, 1, 0, 0, 1, 0, 0, 1, 0],
+                [0, 0, 1, 0, 0, 1, 0, 0, 1]
+            ],
+            constraint_types=["=", "=", "=", "=", "=", "="],
+            b=[1, 1, 1, 1, 1, 1],
+            variable_names=["x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9"]
+        )
+        std_res = StandardSimplexSolver(req).solve()
+        rev_res = RevisedSimplexSolver(req).solve()
+
+        assert "OPTIMAL" in std_res.status
+        assert "OPTIMAL" in rev_res.status
+        assert std_res.optimal_value.fraction == "200"
+        assert rev_res.optimal_value.fraction == "200"
+
+    def test_flujo_costo_minimo_red4(self):
+        """
+        Ejercicio de flujo a costo mínimo:
+        Envío de 4 unidades de nodo 1 a 4 con capacidades y transbordo.
+        Esperado: Z* = 26
+        """
+        req = LinearProgramRequest(
+            objective_type="MINIMIZE",
+            c=[2, 4, 1, 5, 3],
+            A=[
+                [1, 1, 0, 0, 0],
+                [-1, 0, 1, 1, 0],
+                [0, -1, -1, 0, 1],
+                [0, 0, 0, 1, 1],
+                [1, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 1]
+            ],
+            constraint_types=["=", "=", "=", "=", "<=", "<=", "<=", "<=", "<="],
+            b=[4, 0, 0, 4, 3, 2, 2, 2, 4],
+            variable_names=["x1", "x2", "x3", "x4", "x5"]
+        )
+        std_res = StandardSimplexSolver(req).solve()
+        rev_res = RevisedSimplexSolver(req).solve()
+
+        assert "OPTIMAL" in std_res.status
+        assert "OPTIMAL" in rev_res.status
+        assert std_res.optimal_value.fraction == "26"
+        assert rev_res.optimal_value.fraction == "26"
+
+    def test_flujo_costo_minimo_transporte(self):
+        """
+        Ejercicio de modelo de transporte como flujo a costo mínimo:
+        Transporte de 2 plantas a 3 clientes como flujo a costo mínimo.
+        Esperado: Z* = 350, x1=20, x3=20, x5=25, x6=5
+        """
+        req = LinearProgramRequest(
+            objective_type="MINIMIZE",
+            c=[4, 6, 8, 5, 3, 7],
+            A=[
+                [1, 1, 1, 0, 0, 0],
+                [0, 0, 0, 1, 1, 1],
+                [1, 0, 0, 1, 0, 0],
+                [0, 1, 0, 0, 1, 0],
+                [0, 0, 1, 0, 0, 1]
+            ],
+            constraint_types=["=", "=", "=", "=", "="],
+            b=[40, 30, 20, 25, 25],
+            variable_names=["x1", "x2", "x3", "x4", "x5", "x6"]
+        )
+        std_res = StandardSimplexSolver(req).solve()
+        rev_res = RevisedSimplexSolver(req).solve()
+
+        assert std_res.status == "OPTIMAL"
+        assert rev_res.status == "OPTIMAL"
+        assert std_res.optimal_value.fraction == "350"
+        assert rev_res.optimal_value.fraction == "350"
+        assert std_res.solution["x1"].fraction == "20"
+        assert std_res.solution["x3"].fraction == "20"
+        assert std_res.solution["x5"].fraction == "25"
+        assert std_res.solution["x6"].fraction == "5"
+
+
