@@ -610,10 +610,6 @@ Este software se concibe como una plataforma pedagógica y experimental diseñad
 - 🚫 **Prohibida la Redistribución No Autorizada:** No está permitida la republicación ni el resubido de este código en repositorios públicos o privados bajo otro nombre o autoría sin consentimiento expreso por escrito del titular.
 - 📖 **Uso Académico y Formativo Permitido:** Se permite la consulta, ejecución local, estudio y referenciación con fines exclusivamente educativos y de autoaprendizaje, **siempre y cuando se mantenga el crédito explícito, visible e inalterable al autor original y a la suite COIS**.
 
-### 3. Contacto con el Autor
-Para consultas académicas, autorizaciones especiales o proyectos de investigación:
-- 📱 **WhatsApp:** [+57 302 853 0092](https://wa.me/573028530092)
-
 ---
 
 <div align="center">
